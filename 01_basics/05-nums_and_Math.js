@@ -16,6 +16,8 @@ const hundreds = 1000000
 
 // +++++++++++++ Maths +++++++++++++++++++++++++++++
 
+// some important methods in Math // 
+
 // console.log(Math);
 // console.log(Math.abs(-4));
 // console.log(Math.round(4.6));
