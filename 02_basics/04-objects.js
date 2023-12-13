@@ -77,3 +77,45 @@ console.log(Object.entries(tinderUser));
 // there is a possibility of crash. To avoid:
 console.log(tinderUser.hasOwnProperty('isLoggedIn'));
 console.log(tinderUser.hasOwnProperty('isLogged'));
+
+//                  ######               //
+// --destructuring in Objects
+const course = {
+    courseName: 'JavaScript',
+    price: '$100',
+    courseInstructor: 'Tabin'
+}
+
+console.log(course.courseInstructor);
+
+// using dot notation again and again can be hectic sometimes,
+// we can use the following to ease our lives
+const {courseInstructor} = course;
+console.log(courseInstructor);
+
+// we can further minimize the name if we wish
+const {courseInstructor: instructor} = course;
+console.log(instructor);
+// this is how we DESTRUCTURE Objects
+
+//                  ######                 //
+// --APIs intro:
+// hand over our work to someone else
+// API values are in JSON
+// JSON can be in the format of an Object or an array 
+// but without a name; ignore the errors for now
+
+{
+    'name': 'Tabin',
+    'courseName': 'JavaScript',
+    'price': 'Free'
+}
+
+[
+    {},
+    {},
+    {}
+]
+
+// randomuser me API
+// JSON formater - Copy and Paste to beautify and understand
