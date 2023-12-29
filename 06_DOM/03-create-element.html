@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W3 Schools </title>
+</head>
+<body style="background-color: black; color: white;"; >
+    
+</body>
+<script>
+    // creating a div element
+    const div = document.createElement('div')
+    console.log(div);
+
+    // creating h1 element
+    const h1 = document.createElement('h1')
+    console.log(h1)
+
+    // adding properties to the div element
+    div.className = "main"
+    // div.id = "myId"
+    div.id = Math.round(Math.random() * 10 + 1) // random id generator
+    // set attribute
+    div.setAttribute("title", "generated title")
+    // adding styles
+    div.style.backgroundColor = "green"
+    div.style.padding = "12px"
+
+    // adding text in the div
+    // --> div.innerText = "W3 Schools"
+    // className and innerText overwrite the
+    // values already stored in them
+
+    // setAttribute does not overwrite
+    
+    // the actual way to add text in the div
+    const addText = document.createTextNode("W3 Schools2")
+    div.appendChild(addText);
+
+    // why doesn't it show on the page though?
+    // the div we created is in the memory, after attaching
+    // it is showed on page
+    // appendChild to body 
+    document.body.appendChild(div)
+</script>    
+</html>
