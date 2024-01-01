@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM with W3 Schools</title>
+</head>
+<body style="background-color: #212121; color: white;">
+    <ul class="language">
+        <li>Javascript</li>
+    </ul>
+</body>
+<script>
+    // adding list item --> design a function
+    function addLanguage(langName){
+        const li = document.createElement('li') // create list element
+        li.innerHTML = langName // adding language name in li
+        document.querySelector('.language').appendChild(li)
+        // select language class and then append li
+    }
+    addLanguage("Python")
+    addLanguage("TypeScript")
+
+    // 3 languages now. Basic way to add an element. create, add element 
+    // and then attach with append. 
+    // there is a problem with this though. with each append, it has to 
+    // traverse the entire tree, from window to document to body and so on.
+    // how difficult would it be to add 1000s of languages. Need a better way.
+
+    function addOptiLanguage(langName) {
+        const li = document.createElement('li')     // create li element
+        const addText = document.createTextNode(langName) // add text node
+        li.appendChild(addText)
+        // or in 1 line => li.appendChild(document.createTextNode(langName))
+        document.querySelector('.language').appendChild(li)
+    }
+    addOptiLanguage("GoLang")
+    // in this way we don't have to traverse the entire tree to add a lang
+    // don't go after innerHTML, focus more on append
+
+    // editing list items
+    const secondLang = document.querySelector('li:nth-child(2)') //select Python
+    //secondLang.innerHTML = "Mojo" => again not optimized way
+    const newLi = document.createElement('li')  // create new Li element
+    newLi.textContent = "Mojo"      // put Mojo in newLi
+    secondLang.replaceWith(newLi)   // replace Python with Mojo
+
+    // edit another example
+    const firstLang = document.querySelector('li:first-child')// Javascript
+    firstLang.outerHTML = '<li>TypeScript</li>' // using outerHTML to edit
+    // outerHTML takes an entire html
+
+    // remove a list item
+    const lastLang = document.querySelector('li:last-child')
+    lastLang.remove()   // => removed GoLang
+</script>
+</html>
