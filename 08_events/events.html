@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Events</title>
+</head>
+<body style="background-color: #414141; color: aliceblue">
+    <h2>Amazing Images</h2>
+    <div>
+        <ul id="images">
+            <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" ></li>
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><a target="_blank" style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+    </div>
+</body>
+<script>
+    document.querySelector('#owl').addEventListener('click', function() {
+        alert('owl clicked')
+    }, false)
+    // 3 params for event listener, 3rd is is set to false as default
+    // event propagation --> either true or false
+    // false - event bubbling
+    // true - event capturing
+    // mostly we use the default, event bubbling
+
+    // another way to do the same is to use attachEvent()
+    // another one: jQuery - onEventListener
+
+    document.querySelector('#owl').addEventListener('click', function(e){
+        console.log(e); // e is an object, with many values 
+    }, false)
+
+    // to learn:
+    // type of events, timestamp, preventDefault(), target, toElement
+    // srcElement, currentTarget
+    // location: clientX, clientY, screenX, screenY
+    // altkey, ctrlkey, shiftkey, keyCode (for each key)
+
+    // event capturing example:
+    // capturing (true) and default bubbling (false)
+    document.querySelector('#images').addEventListener('click', function(e){
+        console.log("clicked in ul"); // e is an object, with many values 
+    }, false)   //prints when ul is clicked
+    document.querySelector('#owl').addEventListener('click', function(e){
+        console.log("owl clicked"); 
+    }, false)   //prints only when owl is clicked
+    // note that owl is inside of the ul, the ul cliked msg will also get printed
+    // what will get printed first? the owl msg or the ul msg?
+    // we see that owl msg gets printed first in the console
+    // since its set to false, it bubbles up --> goes lower level to upper level
+    // inner element gets printed first, or bubbling happens
+
+    // another mode is the capturing mode, or when it is set to 'true'
+    // when set to true, first the ul msg gets printed then the owl msg
+
+    // so it is totally dependent on our use case, whether we need capturing
+    // method or the bubbling method
+
+    // stopPropagation:
+    // sometimes we don't want the event to keep on bubbling to the top
+    // we want the inner element to stay apart and not bubble up
+    document.querySelector('#prayer').addEventListener('click', function(e){
+        console.log("prayer clicked");
+        e.stopPropagation()     // only prayer msg is printed, prevents the ul msg
+    }, false)
+
+    // preventDefault:
+    // usually used with submit buttons, sometimes we don't want to submit some 
+    // value, but we just want to store it. The default action of submit is to send
+    // it to the server or the URL, to stop that we use preventDefault
+    document.querySelector('#google').addEventListener('click', function(e){
+        e.preventDefault()      // now the google link won't open
+        console.log("google link clicked");
+        // e.stopPropagation()   => using this ul msg won't print. Think why?
+    }, false)
+
+    // remove and removeChild method:
+    // say we need the image to disappear when clicked
+    
+    document.querySelector('#images').addEventListener('click', function(e){
+        console.log(e.target);  // gives the target of event of clicked
+        console.log(e.target.parentNode);   // gives the parent of the target - li
+        let removeIt = e.target.parentNode
+        removeIt.remove()   // one way to remove
+        removeIt.parentNode.removeChild(removeIt)   // another way, the method available is 
+        // removeChild, that's why we first had to go to its parent and then remove the child
+
+        // when we click on a li item, the whole ul gets removed, we need to fix it
+        // tagName
+        if (e.target.tagName === 'IMG') {
+            let removeIt = e.target.parentNode
+            removeIt.remove()   // one way to remove
+        }
+    }, false)
+</script>
+</html>
