@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setTimeout</title>
+</head>
+<body>
+    <h1>
+        W3 Schools
+    </h1>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    // in window object on browser, we get many functions
+    // setInterval(), setTimeout() --> we get these through browsers
+    // NOT core JS concepts
+    // more functions --> clearTimeout, clearInterval
+
+    
+    // setTimeout(handler function, timeout_in_ms) 
+    // setTimeout executes just ONE time after the timeout
+    setTimeout(() => {
+        console.log('Tabin');   // logs Tabin after 2secs
+    }, 2000);
+
+    // setTimeout using function reference
+    const sayName = function (){
+        console.log('Tariq');
+    }
+    setTimeout(sayName, 5000)   // logs Tariq after 5secs
+    // sayName() is execution
+    // sayName is reference
+
+
+    // change content in H1 element
+    // document.querySelector('h1').innerHTML = 'Tabin is the best!'
+    // say we want this change to happen after some time
+
+    const changeText = function(){
+        document.querySelector('h1').innerHTML = 'MDN Documents'
+    }
+    const changeH1 = setTimeout(changeText, 3000)
+
+
+    // how to stop a setTimeout
+    // clearTimeout takes in reference
+    // when we press the stop button the change in H1 won't happen
+    document.querySelector('#stop').addEventListener('click', function(){
+        clearTimeout(changeH1)
+        console.log('STOPPED');
+    })
+</script>
+</html>
