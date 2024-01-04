@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setTimeout</title>
+</head>
+<body>
+    <h1>
+        Original Text
+    </h1>
+    <button id="stop">Stop</button>
+    <button id="start">Start</button>
+</body>
+<script>
+    // setInterval
+    // setInterval(handler_function, interval_in_ms, parameter)
+    // third parameter is optional
+    setInterval((str) => {
+        console.log(str, 'Tabin', Date.now());
+    }, 1000, "hello");   // logs Tabin every seconds
+
+    // setInterval using function reference
+    const sayName = function(str){
+        console.log(str, "Tariq", Date.now()); 
+    }
+    // const intervalId = setInterval(sayName, 3000, 'hi')
+
+    // clearInterval
+    // clearInterval(intervalId)
+
+    
+    // build start and stop button to start change and stop change
+    let intervalId;
+    document.querySelector('#start').addEventListener('click', () => {
+        intervalId = setInterval(sayName, 2000, 'hi')
+    })
+    document.querySelector('#stop').addEventListener('click', () => {
+        clearInterval(intervalId)
+    })
+
+    // now with pressing start 'hi Tariq' with current date will print
+    // pressing stop will stop logging 'hi Tariq'
+</script>
+</html>
