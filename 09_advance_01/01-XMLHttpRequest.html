@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #212121; color: white;">
+    <h4>
+        Click below for Profile Picture, Name and Bio
+    </h4>
+    <button id="start">
+        Click for INFO
+    </button>
+</body>
+<script>
+    let name;
+    let profilePic;
+    let bio;
+    // fetch is the modern way to request APIs
+    // XMLHttpRequest was the old way to request APIs
+    // XHR or AJAX request
+    const requestUrl = 'https://api.github.com/users/tabin9'    // github api url
+    const xhr = new XMLHttpRequest();                           // create new XHR object
+    // open has two params - 1. method (type of request) AND 2. string
+    xhr.open('GET', requestUrl)
+    xhr.onreadystatechange = function() {
+        console.log(xhr.readyState);      // as the state changes the func gets executed
+        if (xhr.readyState === 4) {
+            // console.log(this.responseText);   // gives the whole data, remember to use 'this'
+            const data = JSON.parse(this.responseText)
+            // console.log(typeof data)         // returns string
+            // the response from URL is a string most of the time
+            // convert string to JSON --> use JSON.pars     // IMPORTANT
+            // without JSON.parse it will log undefined
+            name = data.name
+            profilePic = data.avatar_url;
+            bio = data.bio;
+        }
+    }
+    // send the request
+    xhr.send();
+
+    let div, pic, nameT, bioG;
+
+    document.querySelector('#start').addEventListener('click', (e) => {
+        // create a container div, then its 3 children and append them in the end
+        div = document.createElement('div')
+        pic = document.createElement('img')
+        nameT = document.createElement('p')
+        bioG = document.createElement('p')
+        
+        // styling the container div
+        div.style.backgroundColor = 'white'
+        div.style.color = 'black'
+        div.style.width = '410px'
+        div.style.height = '310px'
+        div.style.marginTop = '20px'
+        div.style.margin = '0 auto'
+
+        // styling the pic we added
+        pic.style.marginTop = '20px'
+        pic.style.marginLeft = '30px'
+        pic.style.height = '200px'
+        pic.style.width = '250px'
+
+        // style the name
+        nameT.style.marginLeft = '30px'
+        nameT.style.fontWeight = 'bold'
+
+        // styling bio
+        bioG.style.marginLeft = '30px'
+        bioG.style.fontWeight = 'bold'
+
+        // add data to the elements
+        bioG.innerHTML =  bio
+        nameT.innerHTML = name
+        pic.src = profilePic
+        
+        // add children to the container div
+        div.appendChild(pic)
+        div.appendChild(nameT)
+        div.appendChild(bioG)
+
+        // always remember to attach the container div to the body
+        document.body.appendChild(div)
+    })
+</script>
+</html>
