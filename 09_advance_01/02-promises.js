@@ -134,5 +134,8 @@ fetch('https://api.github.com/users/tabin9')
 
 
 // what gets printed first in the log?
-// all the data from API is displayed first, then all the others get logged
-// discussed in next file
+// all the data using fetch is displayed first, then all the others get logged
+// why? fetch callbacks have a special queue (priority queue)
+// it gets executed first. fetch returns a promise
+// which then is consumed using .then(), .catch() or
+// using the async-await in try-catch block
